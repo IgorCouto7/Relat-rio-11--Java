@@ -1,0 +1,50 @@
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+
+// Classe base
+class Boss {
+    private String nome;
+    private String pontoFraco;
+    private LinkedHashSet<String> moveset = new LinkedHashSet<>();
+
+    public Boss(String nome, String pontoFraco) {
+        this.nome = nome;
+        this.pontoFraco = pontoFraco;
+    }
+
+    public void adicionarAtaque(String ataque) {
+        moveset.add(ataque);
+    }
+
+    public void mostrarAtaques() {
+        System.out.println("Ataques de " + nome + ": " + moveset);
+    }
+
+    public String getNome() { return nome; }
+}
+
+// Subclasse
+class BossMagico extends Boss {
+    public BossMagico(String nome, String pontoFraco) {
+        super(nome, pontoFraco);
+    }
+}
+
+// Agregação com HashMap
+class Encontro {
+    private HashMap<String, Boss> batalhas = new HashMap<>();
+
+    public void adicionarBoss(String id, Boss boss) {
+        batalhas.put(id, boss);
+    }
+
+    public void iniciarBatalha(String idBoss) {
+        Boss boss = batalhas.get(idBoss);
+        if (boss != null) {
+            System.out.println("Iniciando batalha contra " + boss.getNome() + "!");
+            boss.mostrarAtaques();
+        } else {
+            System.out.println("Boss não encontrado!");
+        }
+    }
+}
