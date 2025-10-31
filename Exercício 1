@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+
+// Classe base
+class Personagem {
+    private String nome;
+    private int poder;
+
+    public Personagem(String nome, int poder) {
+        this.nome = nome;
+        this.poder = poder;
+    }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public int getPoder() { return poder; }
+    public void setPoder(int poder) { this.poder = poder; }
+
+    public void mostrarInfo() {
+        System.out.println("Personagem: " + nome + " | Poder: " + poder);
+    }
+}
+
+// Subclasse
+class Mago extends Personagem {
+    private String elemento;
+
+    public Mago(String nome, int poder, String elemento) {
+        super(nome, poder);
+        this.elemento = elemento;
+    }
+
+    public String getElemento() { return elemento; }
+    public void setElemento(String elemento) { this.elemento = elemento; }
+
+    @Override
+    public void mostrarInfo() {
+        System.out.println("Mago " + getNome() + " domina o elemento " + elemento);
+    }
+}
+
+// Classe Divisao
+class Divisao {
+    private String nome;
+
+    public Divisao(String nome) { this.nome = nome; }
+
+    public String getNome() { return nome; }
+}
+
+// Agregação no Castelo
+class Castelo {
+    private String nome;
+    private ArrayList<Divisao> divisoes = new ArrayList<>();
+
+    public Castelo(String nome) { this.nome = nome; }
+
+    public void adicionarDivisao(Divisao divisao) {
+        divisoes.add(divisao);
+    }
+
+    public void mostrarDivisoes() {
+        System.out.println("Castelo " + nome + " possui as divisões:");
+        for (Divisao d : divisoes) {
+            System.out.println(" - " + d.getNome());
+        }
+    }
+}
