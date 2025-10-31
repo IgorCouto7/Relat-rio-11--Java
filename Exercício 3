@@ -1,0 +1,63 @@
+import java.util.HashMap;
+
+// Interface
+interface Rastreavel {
+    String obterCoordenadas();
+}
+
+// Componente (Poder)
+class Poder {
+    private String tipo;
+
+    public Poder(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipo() { return tipo; }
+}
+
+// Alien e Youkai implementam Rastreavel
+class Alien implements Rastreavel {
+    private String nome;
+    private Poder poder;
+
+    public Alien(String nome, Poder poder) {
+        this.nome = nome;
+        this.poder = poder;
+    }
+
+    @Override
+    public String obterCoordenadas() {
+        return "Alien " + nome + " detectado nas coordenadas [42, -17]";
+    }
+}
+
+class Youkai implements Rastreavel {
+    private String nome;
+    private Poder poder;
+
+    public Youkai(String nome, Poder poder) {
+        this.nome = nome;
+        this.poder = poder;
+    }
+
+    @Override
+    public String obterCoordenadas() {
+        return "Youkai " + nome + " detectado nas coordenadas [15, 88]";
+    }
+}
+
+// Registro usando HashMap
+class RegistroOculto {
+    private HashMap<String, Rastreavel> registros = new HashMap<>();
+
+    public void adicionarEntidade(String nome, Rastreavel entidade) {
+        registros.putIfAbsent(nome, entidade);
+    }
+
+    public void listarRegistros() {
+        for (String nome : registros.keySet()) {
+            System.out.println(nome + " → " + registros.get(nome).obterCoordenadas());
+        }
+    }
+}
